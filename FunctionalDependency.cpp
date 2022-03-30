@@ -8,6 +8,16 @@ FunctionalDependency::FunctionalDependency(std::string initStr) {
 	to = AttributeSet(second);
 }
 
+FunctionalDependency::FunctionalDependency(AttributeSet from, AttributeSet to) {
+	this->from = from;
+	this->to = to;
+}
+
+FunctionalDependency::FunctionalDependency(char from, char to) {
+	this->from = AttributeSet(std::string(1, from));
+	this->to = AttributeSet(std::string(1, to));
+}
+
 std::ostream& operator<<(std::ostream& os, const FunctionalDependency& fd) {
 	os << fd.from << "->" << fd.to;
 	return os;
@@ -21,4 +31,8 @@ bool operator<(const FunctionalDependency& x, const FunctionalDependency& y) {
 	} else {
 		return false;
 	}
+}
+
+bool operator==(const FunctionalDependency& x, const FunctionalDependency& y) {
+	return (x.from == y.from) && (x.to == y.to);
 }
