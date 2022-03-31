@@ -8,6 +8,7 @@
 #include "CalculateFDClosure.hpp"
 #include "CalculateAttributeClosure.hpp"
 #include "CalculateMinimalCover.hpp"
+#include "CalculateAllCandidateKeys.hpp"
 
 int main() {
 	/*Relation R("ABC");
@@ -53,7 +54,7 @@ int main() {
 	//FDSet F({FD("A->BC"), FD("B->C"), FD("A->B"), FD("AB->C")});
 
 
-	Relation R("ABCD");
+	/*Relation R("ABCD");
 
 	FDSet F({FD("A->BC"), FD("C->AB"), FD("B->AC")});
 
@@ -69,5 +70,13 @@ int main() {
 				==	
 			CalculateFDClosure(ans1, R)
 		)
-	<< std::endl;
+	<< std::endl;*/
+
+	Relation R("ABCDEF");
+
+	FDSet S({FD("DF->C"), FD("BC->F"), FD("E->A"), FD("ABC->E")});
+
+	auto res = CalculateAllCandidateKeys(R, S);
+
+	std::cout << res;
 }

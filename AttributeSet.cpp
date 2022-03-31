@@ -89,3 +89,11 @@ AttributeSet operator-(const AttributeSet& x, const AttributeSet& y) {
 
 	return rtn;
 }
+
+AttributeSet operator*(const AttributeSet& x, const AttributeSet& y) {
+	AttributeSet rtn;
+
+	std::set_intersection(x.begin(), x.end(), y.begin(), y.end(), std::inserter(rtn, rtn.end()));
+
+	return rtn;
+}

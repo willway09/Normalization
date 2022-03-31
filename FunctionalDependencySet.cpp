@@ -13,7 +13,7 @@ std::ostream& operator<<(std::ostream& os, const FunctionalDependencySet& fds) {
 		os << fd << " ";
 		counter++;
 		if(counter > 5) {
-			std::cout << std::endl;
+			os << std::endl;
 			counter = 0;
 		}
 	}
