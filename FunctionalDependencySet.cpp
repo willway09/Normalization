@@ -21,7 +21,7 @@ std::ostream& operator<<(std::ostream& os, const FunctionalDependencySet& fds) {
 }
 
 FunctionalDependencySet operator-(const FunctionalDependencySet& x, const FunctionalDependencySet& y) {
-	FunctionalDependencySet rtn = x;
+	FunctionalDependencySet rtn({});
 
 	std::set_difference(x.begin(), x.end(), y.begin(), y.end(), std::inserter(rtn, rtn.end()));
 

@@ -49,6 +49,8 @@ FunctionalDependencySet CalculateFDClosure(FunctionalDependencySet fds, Relation
 				}
 			}
 		}
+
+		fdsplus = temp;
 	
 		if(fdsplus == fdsplusold) break;
 		fdsplusold = fdsplus;
