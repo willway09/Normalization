@@ -1,13 +1,16 @@
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "FunctionalDependency.hpp"
 #include "FunctionalDependencySet.hpp"
 
 #include "CalculateFDClosure.hpp"
+#include "CalculateAttributeClosure.hpp"
+#include "CalculateMinimalCover.hpp"
 
 int main() {
-	Relation R("ABC");
+	/*Relation R("ABC");
 
 	FDSet answer = FDSet({
 			FD("A->BC"),	FD("B->C"),	FD("ABC->A"),	FD("C->C"),	FD("AC->AC"),	FD("B->B"),	FD("ABC->BC"),
@@ -28,4 +31,43 @@ int main() {
 
 	std::cout << "Difference1: " << std::endl << (answer - result) << std::endl << std::endl;
 	std::cout << "Difference2: " << std::endl << (result - answer) << std::endl << std::endl;
+
+	AttributeSet A("ABC");
+	AttributeSet B("D");*/
+
+	/*Relation R("ABCGHI");
+	FDSet fds = FDSet({
+		FD("A->B"), FD("A->C"), FD("CG->H"), FD("CI->G")
+	});
+
+	AttributeSet attributes = AttributeSet("AG");
+
+	auto closure = CalculateAttributeClosure(fds, attributes);
+
+	std::cout << "Closure of " << attributes << ": " << closure << std::endl;*/
+
+
+	//Relation R("ABD");
+	//FDSet F({FD("B->A"), FD("D->A"), FD("AB->D")});
+
+	//FDSet F({FD("A->BC"), FD("B->C"), FD("A->B"), FD("AB->C")});
+
+
+	Relation R("ABCD");
+
+	FDSet F({FD("A->BC"), FD("C->AB"), FD("B->AC")});
+
+
+	std::cout << CalculateMinimalCover(F) << std::endl;
+	std::cout << CalculateNonstandardMinimalCover(F) << std::endl;
+
+ 	auto ans1 = FDSet({FD("A->B"), FD("C->A"), FD("B->C")});
+
+	std::cout << 
+		(
+			CalculateFDClosure(F, R)
+				==	
+			CalculateFDClosure(ans1, R)
+		)
+	<< std::endl;
 }

@@ -27,3 +27,23 @@ FunctionalDependencySet operator-(const FunctionalDependencySet& x, const Functi
 
 	return rtn;
 }
+
+FunctionalDependencySet operator+(const FunctionalDependencySet& x, const FunctionalDependencySet& y) {
+	FunctionalDependencySet rtn = x;
+
+	rtn.insert(y.begin(), y.end());
+
+	return rtn;
+}
+
+FunctionalDependencySet operator-(const FunctionalDependencySet& fds, const FunctionalDependency& fd) {
+	FDSet rtn = fds;
+	rtn.erase(fd);
+	return rtn;
+}
+
+FunctionalDependencySet operator+(const FunctionalDependencySet& fds, const FunctionalDependency& fd) {
+	FDSet rtn = fds;
+	rtn.insert(fd);
+	return rtn;
+}

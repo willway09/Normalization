@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <vector>
 
 class AttributeSet : public std::set<char> {
 	public:
@@ -9,6 +10,7 @@ class AttributeSet : public std::set<char> {
 		AttributeSet() {
 
 		}
+		AttributeSet(std::vector<char>& attributes);
 
 		std::set<AttributeSet> powerSetNoEmpty();
 
@@ -20,5 +22,6 @@ class AttributeSet : public std::set<char> {
 
 std::ostream& operator<<(std::ostream& os, const std::set<AttributeSet>& asSet);
 AttributeSet operator+(const AttributeSet& x, const AttributeSet& y);
+AttributeSet operator-(const AttributeSet& x, const AttributeSet& y);
 
 typedef AttributeSet Relation;

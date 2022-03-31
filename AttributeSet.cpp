@@ -35,6 +35,12 @@ std::set<AttributeSet> AttributeSet::powerSetNoEmpty() {
 }
 
 
+AttributeSet::AttributeSet(std::vector<char>& attributes) {
+	for(auto attribute : attributes) {
+		insert(attribute);
+	}
+}
+
 std::ostream& operator<<(std::ostream& os, const AttributeSet& as) {
 	for(auto attribute : as) {
 		os << attribute;
@@ -77,7 +83,7 @@ AttributeSet operator+(const AttributeSet& x, const AttributeSet& y) {
 }
 
 AttributeSet operator-(const AttributeSet& x, const AttributeSet& y) {
-	AttributeSet rtn = x;
+	AttributeSet rtn;
 
 	std::set_difference(x.begin(), x.end(), y.begin(), y.end(), std::inserter(rtn, rtn.end()));
 
