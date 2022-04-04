@@ -1,5 +1,8 @@
 all: website
 
+normalization.a: main
+	ar ru normalization.a *.o
+
 main: FunctionalDependency.o AttributeSet.o FunctionalDependencySet.o CalculateFDClosure.hpp CalculateAttributeClosure.hpp CalculateMinimalCover.hpp
 	g++ -g -std=c++17 -o main main.cpp FunctionalDependency.o AttributeSet.o FunctionalDependencySet.o
 

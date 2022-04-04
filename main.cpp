@@ -72,11 +72,17 @@ int main() {
 		)
 	<< std::endl;*/
 
-	Relation R("ABCDEF");
+	/*Relation R("ABCDEF");
 
 	FDSet S({FD("DF->C"), FD("BC->F"), FD("E->A"), FD("ABC->E")});
 
 	auto res = CalculateAllCandidateKeys(R, S);
 
-	std::cout << res;
+	std::cout << res;*/
+
+	FDSet fds({ FD("A->B"), FD("AB->C"), FD("D->ACE"), FD("C->E") });
+
+	Relation R("ABCDE");
+
+	std::cout << CalculateMinimalCover(fds) << std::endl;
 }

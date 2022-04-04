@@ -58,5 +58,11 @@ std::set<AttributeSet> CalculateAllCandidateKeys(Relation R, FunctionalDependenc
 		}
 	}
 
+	//std::cout << "Step 1 (Neither side): " << neitherSide << std::endl;
+	//std::cout << "Step 2 (Left side): " << leftSideOnly << std::endl;
+	//std::cout << "Step 3 (Right side): " << rightSideOnly << std::endl;
+	//std::cout << "Step 4 (Must Include): " << mustInclude << std::endl;
+	//std::cout << "Step 6 (Both): " << bothSides << std::endl;
+
 	return rtn;
 }

@@ -11,26 +11,47 @@ FunctionalDependencySet CalculateMinimalCoverIntermediate(FunctionalDependencySe
 	// all attributes on the left-hand sides of FDs in Fc that are extraneous
 	auto temp = Fc;
 
+	//std::cout << "Step 2" << std::endl;
+
 	do {
 		Fc = temp;
 		for(auto fd : Fc) { 
+			std::cout << "For $" << fd.from << " \\ar " << fd.to << "$:" << std::endl;
+			std::cout << "\\begin{itemize}" << std::endl;
+
 			for(auto a : fd.from) {
 				auto missingAttrib = fd.from - AttributeSet({a});
 				auto closure = CalculateAttributeClosure(Fc,  missingAttrib);
 				if((missingAttrib != EmptySet) && (std::includes(closure.begin(), closure.end(), fd.to.begin(), fd.to.end()))) {
 					temp = (temp - fd) + FD(fd.from - AttributeSet({a}), fd.to);
+					//std::cout << "\\mincovertwo\t{" << fd.from << "}\t{" << fd.to << "}\t{" << a << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{1}" << std::endl;
+				} else {
+					//std::cout << "\\mincovertwo\t{" << fd.from << "}\t{" << fd.to << "}\t{" << a << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{0}" << std::endl;
 				}
 			}
+			std::cout << "\\end{itemize}" << std::endl << std::endl;
 		}
+		std::cout << std::endl << std::endl;
 	} while(temp != Fc);
+
+	//std::cout << "==========" << std::endl;
+	//std::cout << Fc << std::endl;
+	//std::cout << "==========" << std::endl;
 
 
 	// Step 3: Perform a right reduction of the remaining FDs in Fc, i.e., identify
 	// and remove all attributes on the right-hand sides of FDs in Fc that are
 	// extraneous
+
+
+	//std::cout << "Step 3" << std::endl;
+
 	do {
 		Fc = temp;
 		for(auto fd : Fc) { 
+			std::cout << "For $" << fd.from << " \\ar " << fd.to << "$:" << std::endl;
+			std::cout << "\\begin{itemize}" << std::endl;
+
 			for(auto b : fd.to) {
 				auto missingAttrib = fd.to - AttributeSet({b});
 
@@ -40,10 +61,19 @@ FunctionalDependencySet CalculateMinimalCoverIntermediate(FunctionalDependencySe
 
 				if(closure.find(b) != closure.end()) {
 					temp = testFc;
+					//std::cout << "\\mincoverthree\t{" << fd.from << "}\t{" << fd.to << "}\t{" << b << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{1}" << std::endl;
+				} else {
+					//std::cout << "\\mincoverthree\t{" << fd.from << "}\t{" << fd.to << "}\t{" << b << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{0}" << std::endl;
 				}
 			}
+			std::cout << "\\end{itemize}" << std::endl << std::endl;
 		}
+		std::cout << std::endl << std::endl;
 	} while(temp != Fc);
+
+	//std::cout << "==========" << std::endl;
+	//std::cout << Fc << std::endl;
+	//std::cout << "==========" << std::endl;
 
 	// Step 4: Remove all FDs of the form A -> EmptySet from Fc, which have perhaps
 	// been produced in the previous step, since they are meaningless
