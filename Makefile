@@ -1,4 +1,4 @@
-all: website
+all: main
 
 normalization.a: main
 	ar ru normalization.a *.o
@@ -22,5 +22,12 @@ website: web.cpp main
 	em++ -g -std=c++17 -o web/web.html web.cpp FunctionalDependency.cpp AttributeSet.cpp FunctionalDependencySet.cpp \
 		-s EXPORTED_FUNCTIONS=_CalculateAllCandidateKeysWebWrapper,_CalculateAttributeClosureWebWrapper,_CalculateFDClosureWebWrapper,_CalculateMinimalCoverWebWrapper\
 		-s EXPORTED_RUNTIME_METHODS=ccall,cwrap
+output: main
+	./main
+	pdflatex output.tex
+	
+
 clean:
 	@-rm main AttributeSet.o FunctionalDependency.o
+	@-rm chaseout.tex
+	@-rm output.aux output.log output.pdf

@@ -1,3 +1,7 @@
 main
 *.o
 *.a
+*.aux
+*.log
+*.pdf
+chaseout.tex
