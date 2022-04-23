@@ -59,10 +59,14 @@ FunctionalDependencySet CalculateMinimalCoverIntermediate(FunctionalDependencySe
 
 				auto closure = CalculateAttributeClosure(testFc, fd.from);
 
+				std::cout << "\\item $CalculateAttributeClosure(" << texifyFDSet(testFc) << ", " << fd.from << ") = " << closure;
+
 				if(closure.find(b) != closure.end()) {
 					temp = testFc;
+					std::cout << " \\supset " << b << "$, so $F_C=" << texifyFDSet(temp) << "$" << std::endl;
 					//std::cout << "\\mincoverthree\t{" << fd.from << "}\t{" << fd.to << "}\t{" << b << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{1}" << std::endl;
 				} else {
+					std::cout << " \\not \\supset " << b << "$, so do nothing" << std::endl;
 					//std::cout << "\\mincoverthree\t{" << fd.from << "}\t{" << fd.to << "}\t{" << b << "}\t{" << missingAttrib << "}\t{" << closure << "}\t{0}" << std::endl;
 				}
 			}

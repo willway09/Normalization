@@ -2,6 +2,7 @@
 
 #include <set>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 #include "FunctionalDependency.hpp"
@@ -21,3 +22,27 @@ FunctionalDependencySet operator+(const FunctionalDependencySet& x, const Functi
 
 typedef FunctionalDependencySet FDSet;
 typedef FunctionalDependencySet FDS;
+
+std::string texifyFDSet(FDSet f) {
+
+	std::string rtn = "\\set{";
+	int counter = 0;
+	for(auto s : f) {
+		std::ostringstream fromss, toss;
+		fromss << s.from;
+		toss << s.to;
+
+		auto from = fromss.str();
+		auto to = toss.str();
+
+		if(from == "") from = "\\varnothing";
+		if(to == "") to = "\\varnothing";
+
+		rtn += from + " \\ar " + to;
+		if(counter != f.size() - 1) {
+			rtn += ", ";
+		}
+		counter++;
+	} rtn += "}";
+	return rtn;
+}
